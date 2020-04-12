@@ -399,7 +399,7 @@ public class UnitTest {
             redBlackTree.insert(22, "soso");
             redBlackTree.insert(13, "soso");
             redBlackTree.insert(11, "soso");
-            String expectedAns = "15B12B22B9R13B20B24B7B11BNBNBNBNBNBNBNBNB10RNBNBNB";
+            String expectedAns = "12B9R15R7B10B13B22BNBNBNB11RNBNB20R24RNBNBNBNBNBNB";
             String actualAns = this.levelOrder(redBlackTree.getRoot());
             Assert.assertEquals(expectedAns, actualAns);
         } catch (Throwable var4) {

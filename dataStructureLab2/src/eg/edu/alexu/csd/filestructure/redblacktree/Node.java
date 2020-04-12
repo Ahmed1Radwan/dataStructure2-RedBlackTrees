@@ -5,17 +5,16 @@ public class Node<T extends Comparable<T>, V> implements INode{
 	private T key;
 	private V value;
 	private Node left,right;
-	private boolean color;
+	private boolean color = RED;
 	public int size;
 	private Node parent;
-
-	public Node(Node parent,T key,V value,boolean color,int size) {
-		this.key = key;
-		this.value = value;
-		this.color = color;
-		this.size = size;
-		this.parent = parent;
+	
+	public Node(T key,V value,Node parent) {
+		this.key=key;
+		this.value=value;
+		this.parent=parent;
 	}
+	
 	
 	@Override
 	public void setParent(INode parent) {

@@ -12,7 +12,7 @@ import javax.management.RuntimeErrorException;
 
 public class TreeMap implements ITreeMap{
 	
-	private IRedBlackTree RB = new RedBlackBST();
+	private IRedBlackTree RB = new RedBlackTree();
 	private HashMap<Comparable,Boolean> taken = new HashMap<Comparable,Boolean>();
 	private int size = 0;
 	
@@ -121,7 +121,7 @@ public class TreeMap implements ITreeMap{
 	public Comparable firstKey() {
 		// TODO Auto-generated method stub
 		INode x = firstKey(RB.getRoot());
-		if(x== null || x.isNull()) return null;
+		if(x== null ) return null;
 		return x.getKey();
 	}
 
@@ -153,19 +153,19 @@ public class TreeMap implements ITreeMap{
 	public Comparable floorKey(Comparable key) {
 		// TODO Auto-generated method stub
 		INode x = floorKey(key,RB.getRoot());
-		if(x==null||x.isNull()) return null;
+		if(x==null) return null;
 		return x.getKey();
 	}
 
 	@Override
 	public Object get(Comparable key) {
 		// TODO Auto-generated method stub
-		if(key==null) return new RuntimeErrorException(null);
+		//if(key==null) return new RuntimeErrorException(null);
 		return RB.search(key);
 	}
 	
 	private void headMap(ArrayList<Map.Entry> arr,Comparable toKey,INode node,boolean inclusive) {
-		if(node==null || node.isNull()) return;
+		if(node==null ) return;
 		if(node.getKey().compareTo(toKey) == 0 && inclusive) {
 			
 			headMap(arr,toKey,node.getLeftChild(),inclusive);
@@ -201,7 +201,7 @@ public class TreeMap implements ITreeMap{
 	}
 
 	private void keySet(Set s,INode node) {
-		if(node == null|| node.isNull()) return;
+		if(node == null) return;
 		keySet(s,node.getLeftChild());
 		s.add(node.getKey());
 		keySet(s,node.getRightChild());
@@ -218,7 +218,10 @@ public class TreeMap implements ITreeMap{
 	private INode lastKey(INode node) {
 		if(node==null||node.isNull()) return null;
 		
-		if(node.getRightChild().isNull()) return node;
+		if(node.getRightChild() == null) {
+			System.out.println("here1");
+			return node;
+		}
 		return lastKey(node.getRightChild());
 	}
 
@@ -226,7 +229,9 @@ public class TreeMap implements ITreeMap{
 	public Entry lastEntry() {
 		// TODO Auto-generated method stub
 		INode x = lastKey(RB.getRoot());
-		if(x==null||x.isNull()) return null;
+		System.out.println("here2");
+		System.out.println(x);
+		if(x==null) return null;
 		return Map.entry(x.getKey(), x.getValue());
 	}
 
@@ -234,7 +239,7 @@ public class TreeMap implements ITreeMap{
 	public Comparable lastKey() {
 		// TODO Auto-generated method stub
 		INode x = lastKey(RB.getRoot());
-		if(x==null||x.isNull()) return null;
+		if(x==null) return null;
 		return x.getKey();
 	}
 
@@ -242,7 +247,7 @@ public class TreeMap implements ITreeMap{
 	public Entry pollFirstEntry() {
 		// TODO Auto-generated method stub
 		INode x = firstKey(RB.getRoot());
-		if(x==null||x.isNull()) return null;
+		if(x==null) return null;
 		
 		Map.Entry entry = Map.entry(x.getKey(), x.getValue());
 		if(!this.remove(x.getKey())) return null;
@@ -254,7 +259,7 @@ public class TreeMap implements ITreeMap{
 	public Entry pollLastEntry() {
 		// TODO Auto-generated method stub
 		INode x = lastKey(RB.getRoot());
-		if(x==null||x.isNull()) return null;
+		if(x==null) return null;
 		
 		Map.Entry entry = Map.entry(x.getKey(), x.getValue());
 		if(!this.remove(x.getKey())) return null;
