@@ -82,6 +82,7 @@ public class RedBlackTree implements IRedBlackTree{
 				}
 				node = (Node)node.getRightChild();
 			}else {
+				node.setValue(value);
 				return;
 			}
 		}
@@ -284,8 +285,8 @@ public class RedBlackTree implements IRedBlackTree{
 		if(node.getParent().getColor() == BLACK 
 				&& sibling!=null
 				&&sibling.getColor()==BLACK
-				&&sibling.getLeftChild().getColor()==BLACK
-				&&sibling.getRightChild().getColor()==BLACK) {
+				&&sibling.getLeftChild()!=null&&sibling.getLeftChild().getColor()==BLACK
+				&&sibling.getRightChild()!=null&&sibling.getRightChild().getColor()==BLACK) {
 			sibling.setColor(RED);
 			deleteCase1((Node)node.getParent());
 		}else {
@@ -299,8 +300,8 @@ public class RedBlackTree implements IRedBlackTree{
 		if(node.getParent().getColor() == RED 
 				&& sibling!=null
 				&&sibling.getColor()==BLACK
-				&&sibling.getLeftChild().getColor()==BLACK
-				&&sibling.getRightChild().getColor()==BLACK) {
+				&&sibling.getLeftChild()!=null&&sibling.getLeftChild().getColor()==BLACK
+				&&sibling.getRightChild()!=null&&sibling.getRightChild().getColor()==BLACK) {
 			sibling.setColor(RED);
 			node.getParent().setColor(BLACK);
 		}else {
@@ -314,16 +315,16 @@ public class RedBlackTree implements IRedBlackTree{
 		if(node==node.getParent().getLeftChild()
 				&& sibling!=null
 				&&sibling.getColor()==BLACK
-				&&sibling.getLeftChild().getColor()==RED
-				&&sibling.getRightChild().getColor()==BLACK) {
+				&&sibling.getLeftChild()!=null&&sibling.getLeftChild().getColor()==RED
+				&&sibling.getRightChild()!=null&&sibling.getRightChild().getColor()==BLACK) {
 			sibling.setColor(RED);
 			if(sibling.getLeftChild()!=null) sibling.getLeftChild().setColor(BLACK);
 			rotateRight(sibling);
 		}else if(node==node.getParent().getRightChild()
 				&&sibling!=null
 				&&sibling.getColor()==BLACK
-				&&sibling.getLeftChild().getColor()==BLACK
-				&&sibling.getRightChild().getColor()==RED){
+				&&sibling.getLeftChild()!=null&&sibling.getLeftChild().getColor()==BLACK
+				&&sibling.getRightChild()!=null&&sibling.getRightChild().getColor()==RED){
 				
 			sibling.setColor(RED);
 			if(sibling.getRightChild()!=null) sibling.getRightChild().setColor(BLACK);
@@ -341,6 +342,7 @@ public class RedBlackTree implements IRedBlackTree{
 			sibling.getRightChild().setColor(BLACK);
 			rotateLeft(node.getParent());
 		}else {
+			
 			sibling.getLeftChild().setColor(BLACK);
 			rotateRight(node.getParent());
 		}

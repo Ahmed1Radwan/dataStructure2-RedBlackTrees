@@ -97,7 +97,7 @@ public class TreeMap implements ITreeMap{
 		return set;
 	}
 	private void entrySet(Set<Map.Entry> set,INode node) {
-		if(node == null | node.isNull()) return;
+		if(node == null ) return;
 		entrySet(set,node.getLeftChild());
 		
 		set.add(Map.entry(node.getKey(), node.getValue()));
@@ -108,12 +108,12 @@ public class TreeMap implements ITreeMap{
 	public Entry firstEntry() {
 		// TODO Auto-generated method stub
 		INode x = firstKey(RB.getRoot());
-		if(x==null || x.isNull()) return null;
+		if(x==null ) return null;
 		return Map.entry(x.getKey(), x.getValue());
 	}
 	private INode firstKey(INode node) {
-		if(node == null || node.isNull()) return null;
-		if(node.getLeftChild().isNull()) return node;
+		if(node == null ) return null;
+		if(node.getLeftChild() == null) return node;
 		return firstKey(node.getLeftChild());
 	}
 
@@ -216,7 +216,7 @@ public class TreeMap implements ITreeMap{
 	}
 	
 	private INode lastKey(INode node) {
-		if(node==null||node.isNull()) return null;
+		if(node==null) return null;
 		
 		if(node.getRightChild() == null) {
 			System.out.println("here1");

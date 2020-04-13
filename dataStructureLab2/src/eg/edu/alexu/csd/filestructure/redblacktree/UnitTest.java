@@ -1605,6 +1605,7 @@ public class UnitTest {
         if (node != null && !node.isNull()) {
             return this.verifyProperty3(node.getLeftChild()) && this.verifyProperty3(node.getRightChild());
         } else {
+        	if(node == null) return true;
             return !node.getColor();
         }
     }
